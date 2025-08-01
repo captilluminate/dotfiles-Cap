@@ -22,21 +22,40 @@ This repository contains my personal configuration files for various application
 
 ## Installation
 
+### Quick Install (Recommended)
+
+```bash
+# Clone and install in one command
+git clone https://github.com/captilluminate/dotfiles-Cap.git ~/.dotfiles-Cap && cd ~/.dotfiles-Cap && ./install.sh
+```
+
+### Manual Installation
+
 1. Clone this repository:
    ```bash
    git clone https://github.com/captilluminate/dotfiles-Cap.git ~/.dotfiles-Cap
    ```
 
-2. Run the installation script:
+2. Run the universal installation script:
    ```bash
    cd ~/.dotfiles-Cap
    ./install.sh
    ```
 
-The installation script will:
-- Create backups of existing configuration files
-- Create symlinks from your home directory to the dotfiles
-- Preserve your existing configurations in a timestamped backup directory
+### What the installer does:
+
+- **🔍 Auto-detects your Linux distribution** (Arch, Ubuntu, Debian, Fedora, openSUSE, Alpine, etc.)
+- **📦 Installs dependencies** using your system's package manager (pacman, apt, dnf, zypper, apk)
+- **🔗 Creates symlinks** from your home directory to the dotfiles
+- **💾 Creates backups** of existing configurations with timestamps
+- **🎨 Offers to install** optional packages (Neovim, terminals, shells, etc.)
+- **⚙️ Post-install setup** including Starship prompt installation and shell integration
+
+### Installation Options:
+
+1. **Dependencies + Dotfiles** (recommended) - Full setup with package installation
+2. **Dotfiles only** - Just symlink configurations (if you have packages already)
+3. **Dependencies only** - Install packages without linking configs
 
 ## System Information
 
@@ -64,6 +83,25 @@ ln -sf ~/.dotfiles-Cap/config/waybar ~/.config/waybar
 # ... and so on
 ```
 
+## Supported Distributions
+
+The installer automatically detects and supports:
+
+| Distribution | Package Manager | Status |
+|-------------|-----------------|--------|
+| **Arch Linux** | pacman | ✅ Full support |
+| **EndeavourOS** | pacman | ✅ Full support |
+| **Manjaro** | pacman | ✅ Full support |
+| **Ubuntu** | apt | ✅ Full support |
+| **Debian** | apt | ✅ Full support |
+| **Linux Mint** | apt | ✅ Full support |
+| **Pop!_OS** | apt | ✅ Full support |
+| **Fedora** | dnf | ✅ Full support |
+| **RHEL/CentOS** | dnf | ✅ Full support |
+| **openSUSE** | zypper | ✅ Full support |
+| **Alpine Linux** | apk | ✅ Full support |
+| **Other** | auto-detect | ⚠️ Limited support |
+
 ## Updating
 
 To update your dotfiles:
@@ -79,6 +117,56 @@ To update your dotfiles:
    ./install.sh
    ```
 
+## Uninstallation
+
+To remove the dotfiles and optionally restore backups:
+
+```bash
+cd ~/.dotfiles-Cap
+./uninstall.sh
+```
+
+The uninstall script will:
+- Remove all symlinks created by the installer
+- Optionally restore files from backup directories
+- Optionally remove the dotfiles directory and backups
+
+## Troubleshooting
+
+### Package Manager Not Detected
+If your distribution isn't automatically detected, the installer will attempt to find common package managers. You can still install dotfiles manually by choosing option 2.
+
+### Symlink Issues
+If symlinks aren't created properly, check:
+- File permissions on the dotfiles directory
+- Whether target files already exist (they'll be backed up automatically)
+
+### Shell Configuration
+After installation, reload your shell:
+```bash
+# For Bash
+source ~/.bashrc
+
+# For Zsh  
+source ~/.zshrc
+
+# Or start a new shell session
+exec $SHELL
+```
+
 ## Contributing
 
 Feel free to fork this repository and adapt it for your own use!
+
+### Adding Support for New Distributions
+
+To add support for a new distribution:
+
+1. Update the `get_package_manager()` function in `install.sh`
+2. Add the distribution to the supported list in this README
+3. Test the installation on the target distribution
+4. Submit a pull request
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
