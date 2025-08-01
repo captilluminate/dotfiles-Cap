@@ -24,7 +24,7 @@ This repository contains my personal configuration files for various application
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/dotfiles-Cap.git ~/.dotfiles-Cap
+   git clone https://github.com/captilluminate/dotfiles-Cap.git ~/.dotfiles-Cap
    ```
 
 2. Run the installation script:
